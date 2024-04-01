@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Button,
@@ -12,13 +12,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
 import Profile from "./ProfileScreen";
 import Setting from "./SettingScreen";
+import themeContext from "../../../theme/themeContext";
 
 const Stack = createStackNavigator();
 
 const ProfileLayout = () => {
+
+  const theme=useContext(themeContext)
+
   return (
-    <SafeAreaView style={{flex:'1'}}>
-      <Stack.Navigator initialRouteName="Setting">
+    <SafeAreaView style={[{flex:1, backgroundColor:theme.backgroundColor}]}>
+      <Stack.Navigator>
         <Stack.Screen
           name="Profile"
           component={Profile}
@@ -38,7 +42,7 @@ const ProfileLayout = () => {
             headerStyle: {
               height: 0,
             },
-            // headerLeft: null,
+            headerLeft: null,
           }}
         />
       </Stack.Navigator>
