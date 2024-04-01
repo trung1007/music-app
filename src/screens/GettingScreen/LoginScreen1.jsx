@@ -14,8 +14,9 @@ import { Color } from "../../../GlobalStyle";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
+const THEME = ['black', 'white'];
 
-const STYLES = ["default", "dark-content", "light-content"];
+
 
 const LoginScreen1 = () => {
   const navigation = useNavigation();
@@ -26,10 +27,11 @@ const LoginScreen1 = () => {
     navigation.navigate("Register");
   };
 
-  const [statusBarStyle, setStatusBarStyle] = useState(STYLES[2]);
+  const [theme, setTheme]=useState(THEME[1])
+
+  
   return (
     <SafeAreaView style={styles.wrapper}>
-      <StatusBar barStyle={statusBarStyle} />
       <View style={{ paddingLeft: 10 }}>
         <TouchableOpacity
           onPress={() => {
