@@ -16,15 +16,34 @@ import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 
 import { useNavigation } from "@react-navigation/native";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "@firebase/auth";
+import { FIREBASE_AUTH,FIREBASE_APP } from "../../config/firebase"
 
 const LoginScreen2 = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState("trungthanhcao.2003@gmail.com");
+  const [password, setPassword] = useState("12323123");
   const goLayout = () => {
     navigation.navigate("Layout");
   };
   const goRes = () => {
     navigation.navigate("Register");
   };
+
+  const handleLogin = async ()=>{
+    try {
+      await signInWithEmailAndPassword(FIREBASE_AUTH, email, password)
+      goLayout()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -50,6 +69,8 @@ const LoginScreen2 = () => {
             style={styles.textInput}
             placeholder="Email"
             placeholderTextColor="white"
+            value={email}
+            onChange={setEmail}
           />
         </View>
         <View style={styles.formInput}>
@@ -58,11 +79,13 @@ const LoginScreen2 = () => {
             style={styles.textInput}
             placeholder="Password"
             placeholderTextColor="white"
+            value={password}
+            // onChange={}
             secureTextEntry
           />
         </View>
         <View>
-          <TouchableOpacity onPress={goLayout}>
+          <TouchableOpacity onPress={handleLogin}>
             <View style={styles.LoginBtn}>
               <Text style={{ color: "white" }}>Login</Text>
             </View>
