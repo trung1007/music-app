@@ -6,7 +6,9 @@ import { useEffect, useState } from 'react';
 import { Audio } from 'expo-av';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Slider from '@react-native-community/slider';
- 
+import {  collection, getDocs } from 'firebase/firestore';
+import { FIREBASE_DB } from '../../config/firebase';
+
 export default function OnlineMusicScreen() {
     const [musicFiles, setMusicFiles] = useState([])
     const [playing, setPlaying] = useState(-1)
@@ -21,16 +23,18 @@ export default function OnlineMusicScreen() {
         // const media = await MediaLibrary.getAssetsAsync({
         //     mediaType: MediaLibrary.MediaType.audio,
         // });
-        const tracks = [
-          {
-            uri: 'https://firebasestorage.googleapis.com/v0/b/historyquiz-18df1.appspot.com/o/music%2Fbetter.mp3?alt=media&token=b403154e-5584-4d93-83da-068c79b24c0b',
-            title: "Better"
-          }, 
-          {
-            uri: 'https://firebasestorage.googleapis.com/v0/b/historyquiz-18df1.appspot.com/o/music%2Freality.mp3?alt=media&token=de953ad1-e380-4479-975c-be70cec00783',
-            title: 'Reality'
-          }
-        ]
+      
+          const tracks = []
+
+        const onlineTracks = await getDocs(collection(FIREBASE_DB, "Music"));
+        onlineTracks.forEach((doc) => {
+            console.log(`${doc.id} => ${doc.data().uri}`);
+            tracks.push({
+                uri: doc.data().uri,
+                title: doc.data().title,
+            });
+        });
+        
         // setMusicFiles(media.assets)
         setMusicFiles(tracks);
     }
@@ -49,7 +53,7 @@ export default function OnlineMusicScreen() {
         setDurationMilis(status.durationMillis);
 
         setSound(sound);
-        
+        setPositionMilis(0);
         await sound.playAsync();
     }
 
@@ -156,7 +160,7 @@ export default function OnlineMusicScreen() {
  
                                     {playing === index ?
                                         <Text style={styles.fileName}>
-                                            {progressDuration} / {file.duration}
+                                            {progressDuration} / {durationMillis / 1000}
                                         </Text> :
                                         <></>
                                     }

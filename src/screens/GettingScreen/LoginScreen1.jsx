@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   Login: {
     display: "flex",
     alignItems: "center",
-    gap: "15",
+    gap: 15,
     marginTop: 10,
   },
   LoginOption: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     gap: 10,
     width: 350,
     height: 60,
-    borderWidth: "3",
+    borderWidth: 3,
     borderColor: "white",
     borderRadius: 12,
   },

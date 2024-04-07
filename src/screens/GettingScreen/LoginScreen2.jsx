@@ -27,8 +27,8 @@ import { FIREBASE_AUTH,FIREBASE_APP } from "../../config/firebase"
 
 const LoginScreen2 = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState("trungthanhcao.2003@gmail.com");
-  const [password, setPassword] = useState("12323123");
+  const [email, setEmail] = useState("quyenhoangntt03@gmail.com");
+  const [password, setPassword] = useState("123456");
   const goLayout = () => {
     navigation.navigate("Layout");
   };
@@ -38,9 +38,13 @@ const LoginScreen2 = () => {
 
   const handleLogin = async ()=>{
     try {
+      
       await signInWithEmailAndPassword(FIREBASE_AUTH, email, password)
+      
       goLayout()
     } catch (error) {
+      console.log(email)
+      console.log(password)
       console.log(error)
     }
   }
@@ -70,7 +74,7 @@ const LoginScreen2 = () => {
             placeholder="Email"
             placeholderTextColor="white"
             value={email}
-            onChange={setEmail}
+            onChangeText={setEmail}
           />
         </View>
         <View style={styles.formInput}>
@@ -80,7 +84,7 @@ const LoginScreen2 = () => {
             placeholder="Password"
             placeholderTextColor="white"
             value={password}
-            // onChange={}
+            onChangeText={setPassword}
             secureTextEntry
           />
         </View>

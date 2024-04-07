@@ -29,7 +29,7 @@ const Setting = () => {
 
   return (
     <SafeAreaView
-      style={[{ flex: "1" }, { backgroundColor: theme.backgroundColor }]}
+      style={[{ flex: 1 }, { backgroundColor: theme.backgroundColor }]}
     >
       <View style={{ paddingLeft: 10 }}>
         <TouchableOpacity
