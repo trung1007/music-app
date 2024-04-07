@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 const HomeLayout = () => {
   return (
-    <SafeAreaView style={{flex:1}}>
+    <View style={{flex:1}}>
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
@@ -28,7 +28,7 @@ const HomeLayout = () => {
           }}
         />
       </Stack.Navigator>
-    </SafeAreaView>
+    </View>
   );
 };
 

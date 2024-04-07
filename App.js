@@ -62,6 +62,7 @@ export default function App() {
 
   return (
     <themeContext.Provider value={darkMode===true ? theme.dark: theme.light}>
+      {/* <SafeAreaView style={styles.container}> */}
       <NavigationContainer>
         <StatusBar
           animated={true}
@@ -128,6 +129,7 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      {/* </SafeAreaView> */}
     </themeContext.Provider>
   );
 }
@@ -135,8 +137,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    // backgroundColor: "#fff",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
 });

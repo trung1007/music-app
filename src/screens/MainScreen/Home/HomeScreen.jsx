@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   content: {
     // paddingLeft: 10,
     // paddingRight: 10,
-    marginBottom:80
+    marginBottom:40
   },
   SOTDtext: {
     fontSize: 18,
