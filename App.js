@@ -13,6 +13,7 @@ import Layout from "./src/screens/MainScreen/Layout";
 import themeContext from "./src/theme/themeContext";
 import theme from "./src/theme/theme";
 import { EventRegister } from "react-native-event-listeners";
+import MusicScreen from "./src/screens/MusicScreen";
 
 
 const Stack = createStackNavigator();
@@ -72,6 +73,17 @@ export default function App() {
           hidden={hidden}
         />
         <Stack.Navigator>
+          <Stack.Screen
+            name="Music1"
+            component={MusicScreen}
+            options={{
+              title: "",
+              headerStyle: {
+                height: 0,
+              },
+              headerLeft: null,
+            }}
+          />
           <Stack.Screen
             name="Getting1"
             component={Getting1}

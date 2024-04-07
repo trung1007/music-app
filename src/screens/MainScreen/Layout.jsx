@@ -22,6 +22,8 @@ import HomeLayout from "./Home/HomeLayout";
 import { EventRegister } from "react-native-event-listeners";
 import theme from "../../theme/theme";
 import themeContext from "../../theme/themeContext";
+import MusicScreen from "../MusicScreen";
+import OnlineMusicScreen from "./OnlineMusicScreen";
 import { NavigationContainer } from "@react-navigation/native";
 
 
@@ -48,6 +50,28 @@ const Layout = () => {
 
         }}
       >
+          <Tab.Screen
+            name="Online Music"
+            component={OnlineMusicScreen}
+            options={{
+              title: "Music",
+              tabBarIcon: ({ color }) => (
+                <Entypo name="music" size={24} color={color} />
+              ),
+              // tabBarActiveTintColor: Color.purple,
+            }}
+            />
+          <Tab.Screen
+            name="Local Music"
+            component={MusicScreen}
+            options={{
+              title: "Music",
+              tabBarIcon: ({ color }) => (
+                <Entypo name="music" size={24} color={color} />
+              ),
+              // tabBarActiveTintColor: Color.purple,
+            }}
+          />
         <Tab.Screen
           name="Home"
           component={HomeLayout}
