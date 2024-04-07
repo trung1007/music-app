@@ -11,7 +11,7 @@ import {
   Image,
 } from "react-native";
 import themeContext from "../../theme/themeContext";
-import sildeMusic from "../../components/sildeMusic";
+import sildeMusic from "../../components/sildeMusic1";
 import SlideMuisc1 from "../../components/SlideMuisc1";
 
 const Home = () => {
@@ -63,12 +63,15 @@ const styles = StyleSheet.create({
     letterSpacing: 3,
   },
   content: {
-    paddingLeft: 10,
-    paddingRight: 10,
+    // paddingLeft: 10,
+    // paddingRight: 10,
   },
   SOTDtext: {
     fontSize: 16,
     letterSpacing: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom:10
   },
 });
 

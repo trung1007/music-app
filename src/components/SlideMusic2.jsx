@@ -11,9 +11,8 @@ import {
   Image,
   useWindowDimensions
 } from "react-native";
-import sildeMusic from "./sildeMusic1";
 
-const SlideImage1 = ({ item }) => {
+const SlideImage2 = ({ item }) => {
     const {width} = useWindowDimensions()
   return (
     <View style={[ styles.wrapper]}>
@@ -22,7 +21,8 @@ const SlideImage1 = ({ item }) => {
     </View>
   );
 };
-export default SlideImage1
+
+export default SlideImage2
 
 const styles = StyleSheet.create({
     wrapper:{
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     },
 
   image: {
-    width: 300,
-    height: 300,
-    borderRadius:20
+    width: 160,
+    height: 160,
+    borderRadius:10,
   },
 });

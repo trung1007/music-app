@@ -14,10 +14,11 @@ import { Color } from "../../../GlobalStyle";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import Home from "./HomeScreen";
+// import Home from "./HomeScreen";
 import Search from "./SearchScreen";
 import Library from "./LibraryScreen";
 import ProfileLayout from "./Profile/ProfileLayout";
+import HomeLayout from "./Home/HomeLayout";
 import { EventRegister } from "react-native-event-listeners";
 import theme from "../../theme/theme";
 import themeContext from "../../theme/themeContext";
@@ -54,7 +55,7 @@ const Layout = () => {
         >
           <Tab.Screen
             name="Home"
-            component={Home}
+            component={HomeLayout}
             options={{
               title: "Home",
               tabBarIcon: ({ color }) => (
