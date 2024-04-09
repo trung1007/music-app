@@ -27,8 +27,8 @@ import { FIREBASE_AUTH,FIREBASE_APP } from "../../config/firebase"
 
 const LoginScreen2 = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState("quyenhoangntt03@gmail.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const goLayout = () => {
     navigation.navigate("Layout");
   };
