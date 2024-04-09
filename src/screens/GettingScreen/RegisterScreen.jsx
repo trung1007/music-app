@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Button,
@@ -26,6 +26,7 @@ import {
   signOut,
 } from "@firebase/auth";
 import { FIREBASE_AUTH,FIREBASE_APP } from "../../config/firebase";
+import themeContext from "../../theme/themeContext";
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -43,6 +44,7 @@ const RegisterScreen = () => {
       console.log(error)
     }
   }
+  const theme = useContext(themeContext)
   
 
   const goLayout = () => {
@@ -53,21 +55,21 @@ const RegisterScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}>
       <View style={{ paddingLeft: 10 }}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
           }}
         >
-          <AntDesign name="arrowleft" size={24} color="white" />
+          <AntDesign name="arrowleft" size={24} color={{color:theme.color}} />
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
         <Image source={require("../../../assets/MusicIcon.png")} />
         <View>
-          <Text style={{ color: "white", fontSize: 32, fontWeight: "700" }}>
-            Register your account
+          <Text style={{ color: theme.color, fontSize: 30, fontWeight: "700" }}>
+            Đăng kí tài khoản
           </Text>
         </View>
         <View style={styles.formInput}>
@@ -75,7 +77,7 @@ const RegisterScreen = () => {
           <TextInput
             style={styles.textInput}
             placeholder="Email"
-            placeholderTextColor="white"
+            placeholderTextColor={theme.color}
             value={email}
             onChangeText={setEmail}
           />
@@ -85,7 +87,7 @@ const RegisterScreen = () => {
           <TextInput
             style={styles.textInput}
             placeholder="Password"
-            placeholderTextColor="white"
+            placeholderTextColor={theme.color}
             value={password}
             onChangeText={setPassword}
             secureTextEntry
@@ -93,7 +95,7 @@ const RegisterScreen = () => {
         </View>
         <View>
         
-          <Button title="Sign up" onPress={handleSignUp}/>
+          <Button title="Đăng kí" onPress={handleSignUp}/>
         </View>
         <Image source={require("../../../assets/or1.png")} />
         <View style={styles.LoginOption}>
@@ -108,8 +110,8 @@ const RegisterScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.Register}>
-          <Text style={{ color: "white" }}>Already have an account?</Text>
-          <Button title="Sign in" onPress={goLogin} color={Color.purple} />
+          <Text style={{ color: theme.color }}>Bạn đã có tài khoản</Text>
+          <Button title="Đăng nhập" onPress={goLogin} color={Color.purple} />
         </View>
       </View>
     </SafeAreaView>

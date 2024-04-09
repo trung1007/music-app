@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -13,10 +13,8 @@ import {
 import { Color } from "../../../GlobalStyle";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
-const THEME = ['black', 'white'];
-
-
+import themeContext from "../../theme/themeContext";
+import theme from "../../theme/theme";
 
 const LoginScreen1 = () => {
   const navigation = useNavigation();
@@ -26,19 +24,23 @@ const LoginScreen1 = () => {
   const goRes = () => {
     navigation.navigate("Register");
   };
+  const theme = useContext(themeContext);
 
-  const [theme, setTheme]=useState(THEME[1])
-
-  
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={{ paddingLeft: 10 }}>
+    <SafeAreaView
+      style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}
+    >
+      <View style={[{ paddingLeft: 10 }]}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
           }}
         >
-          <AntDesign name="arrowleft" size={24} color="white" />
+          <AntDesign
+            name="arrowleft"
+            size={24}
+            style={{ color: theme.color }}
+          />
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
@@ -46,22 +48,22 @@ const LoginScreen1 = () => {
           <Image source={require("../../../assets/MusicIcon.png")} />
         </View>
         <View>
-          <Text style={{color:'white', fontSize:32, fontWeight:'700'}}>
-            Let's get you in
+          <Text style={{ color: theme.color, fontSize: 30, fontWeight: "700" }}>
+            Đăng nhập vào ứng dụng
           </Text>
         </View>
         <View style={styles.Login}>
           <TouchableOpacity style={styles.LoginOption}>
             <Image source={require("../../../assets/gg_icon.png")} />
-            <Text style={{ color: "white" }}>Continue with Google</Text>
+            <Text style={{ color: theme.color }}>Đăng nhập với Google</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.LoginOption}>
             <Image source={require("../../../assets/fb_icon.png")} />
-            <Text style={{ color: "white" }}>Continue with FaceBook</Text>
+            <Text style={{ color: theme.color }}>Đăng nhập với FaceBook</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.LoginOption}>
             <Image source={require("../../../assets/apple_icon.png")} />
-            <Text style={{ color: "white" }}>Continue with AppleID</Text>
+            <Text style={{ color: theme.color }}>Đăng nhập với AppleID</Text>
           </TouchableOpacity>
         </View>
         <View>
@@ -70,13 +72,13 @@ const LoginScreen1 = () => {
         <View>
           <TouchableOpacity onPress={goLogin}>
             <View style={styles.LoginBtn}>
-              <Text style={{ color: "white" }}>Login with your password</Text>
+              <Text style={{ color: "white" }}>Đăng nhập bằng tài khoản của bạn</Text>
             </View>
           </TouchableOpacity>
         </View>
         <View style={styles.Register}>
-          <Text style={{ color: "white" }}>Don't have an account?</Text>
-          <Button title="Sign up" onPress={goRes} color={Color.purple} />
+          <Text style={{ color: theme.color }}>Bạn chưa có tài khoản?</Text>
+          <Button title="Đăng kí" onPress={goRes} color={Color.purple} />
         </View>
       </View>
     </SafeAreaView>
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     width: 350,
     height: 60,
     borderWidth: 3,
-    borderColor: "white",
+    borderColor: theme.color,
     borderRadius: 12,
   },
   LoginBtn: {
@@ -121,10 +123,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 24,
   },
-  Register:{
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center'
+  Register: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Button,
@@ -24,6 +24,8 @@ import {
   signOut,
 } from "@firebase/auth";
 import { FIREBASE_AUTH,FIREBASE_APP } from "../../config/firebase"
+import themeContext from "../../theme/themeContext";
+import theme from "../../theme/theme";
 
 const LoginScreen2 = () => {
   const navigation = useNavigation();
@@ -35,12 +37,11 @@ const LoginScreen2 = () => {
   const goRes = () => {
     navigation.navigate("Register");
   };
+  const theme = useContext(themeContext)
 
   const handleLogin = async ()=>{
     try {
-      
       await signInWithEmailAndPassword(FIREBASE_AUTH, email, password)
-      
       goLayout()
     } catch (error) {
       console.log(email)
@@ -50,21 +51,21 @@ const LoginScreen2 = () => {
   }
 
   return (
-    <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}>
       <View style={{ paddingLeft: 10 }}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
           }}
         >
-          <AntDesign name="arrowleft" size={24} color="white" />
+          <AntDesign name="arrowleft" size={24} style={{color:theme.color}} />
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
         <Image source={require("../../../assets/MusicIcon.png")} />
         <View>
-          <Text style={{ color: "white", fontSize: 32, fontWeight: "700" }}>
-            Login to your account
+          <Text style={{ color: theme.color, fontSize: 30, fontWeight: "700" }}>
+            Đăng nhập vào ứng dụng
           </Text>
         </View>
         <View style={styles.formInput}>
@@ -72,7 +73,7 @@ const LoginScreen2 = () => {
           <TextInput
             style={styles.textInput}
             placeholder="Email"
-            placeholderTextColor="white"
+            placeholderTextColor={theme.color}
             value={email}
             onChangeText={setEmail}
           />
@@ -82,7 +83,7 @@ const LoginScreen2 = () => {
           <TextInput
             style={styles.textInput}
             placeholder="Password"
-            placeholderTextColor="white"
+            placeholderTextColor={theme.color}
             value={password}
             onChangeText={setPassword}
             secureTextEntry
@@ -91,7 +92,7 @@ const LoginScreen2 = () => {
         <View>
           <TouchableOpacity onPress={handleLogin}>
             <View style={styles.LoginBtn}>
-              <Text style={{ color: "white" }}>Login</Text>
+              <Text style={{ color: 'white' }}>Login</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -108,8 +109,8 @@ const LoginScreen2 = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.Register}>
-          <Text style={{ color: "white" }}>Don't have an account?</Text>
-          <Button title="Sign up" onPress={goRes} color={Color.purple} />
+          <Text style={{ color: theme.color }}>Bạn chưa có tài khoản?</Text>
+          <Button title="Đăng kí" onPress={goRes} color={Color.purple} />
         </View>
       </View>
     </SafeAreaView>
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: 280,
     height: 50,
-    color: "white",
+    color: theme.color
   },
   LoginBtn: {
     width: 350,

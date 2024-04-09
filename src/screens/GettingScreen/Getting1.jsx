@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Color } from "../../../GlobalStyle";
 import { useNavigation } from "@react-navigation/native";
+import themeContext from "../../theme/themeContext";
 
 
 const THEME = ['black', 'white'];
@@ -17,21 +18,21 @@ const THEME = ['black', 'white'];
 
 const Getting1 = () => {
   const navigation = useNavigation();
+  const theme = useContext(themeContext);
+
   const goNext = () => {
     navigation.navigate("Login1");
   };
-  const [theme, setTheme]=useState(THEME[1])
   
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      
+    <SafeAreaView style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}>
       <View>
-        <Image source={require("../../../assets/MusicIcon.png")} />
+        <Image source={require("../../../assets/MusicIcon.png")} style={styles.logo} />
       </View>
       <View>
         <TouchableOpacity onPress={goNext}>
-          <Text style={{color:theme}}>Let's get started</Text>
+          <Text style={[{color:theme.color}, styles.text]}>Let's get started</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -41,10 +42,17 @@ const Getting1 = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: Color.black,
-    justifyContent: "center",
+    justifyContent: 'space-evenly',
     alignItems: "center",
   },
+  logo:{
+    width:200,
+    height:200
+  },
+
+  text:{
+    fontSize:20
+  }
 });
 
 export default Getting1;

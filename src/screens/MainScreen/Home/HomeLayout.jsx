@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Home1 from "./HomeScreen";
+import HomeScreen from "./HomeScreen";
 
 const Stack = createStackNavigator();
 
@@ -17,8 +17,8 @@ const HomeLayout = () => {
     <View style={{flex:1}}>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
-          component={Home1}
+          name="HomeScreen"
+          component={HomeScreen}
           options={{
             title: "",
             headerStyle: {

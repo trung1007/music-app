@@ -14,7 +14,6 @@ import { Color } from "../../../GlobalStyle";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-// import Home from "./HomeScreen";
 import Search from "./SearchScreen";
 import Library from "./LibraryScreen";
 import ProfileLayout from "./Profile/ProfileLayout";
@@ -26,7 +25,6 @@ import MusicScreen from "../MusicScreen";
 import OnlineMusicScreen from "./OnlineMusicScreen";
 import { NavigationContainer } from "@react-navigation/native";
 
-
 const Tab = createBottomTabNavigator();
 
 const Layout = () => {
@@ -36,42 +34,43 @@ const Layout = () => {
     <SafeAreaView
       style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}
     >
-    {/* <View style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}> */}
+      {/* <View style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}> */}
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: Color.purple,
-          tabBarInactiveTintColor: Color.black,
-          tabBarStyle: {  backgroundColor: theme.backgroundColor, position:"absolute", bottom:-30},
+          tabBarInactiveTintColor: theme.iconColor,
+          tabBarStyle: {
+            backgroundColor: theme.tabBarColor,
+            position: "absolute",
+            bottom: -30,
+          },
           tabBarLabelPosition: "below-icon",
-        
+
           headerStyle: {
             height: 0,
           },
-
         }}
       >
-          <Tab.Screen
-            name="Online Music"
-            component={OnlineMusicScreen}
-            options={{
-              title: "Music",
-              tabBarIcon: ({ color }) => (
-                <Entypo name="music" size={24} color={color} />
-              ),
-              // tabBarActiveTintColor: Color.purple,
-            }}
-            />
-          <Tab.Screen
-            name="Local Music"
-            component={MusicScreen}
-            options={{
-              title: "Music",
-              tabBarIcon: ({ color }) => (
-                <Entypo name="music" size={24} color={color} />
-              ),
-              // tabBarActiveTintColor: Color.purple,
-            }}
-          />
+        <Tab.Screen
+          name="Online Music"
+          component={OnlineMusicScreen}
+          options={{
+            title: "Music",
+            tabBarIcon: ({ color }) => (
+              <Entypo name="music" size={24} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Local Music"
+          component={MusicScreen}
+          options={{
+            title: "Music",
+            tabBarIcon: ({ color }) => (
+              <Entypo name="music" size={24} color={color} />
+            ),
+          }}
+        />
         <Tab.Screen
           name="Home"
           component={HomeLayout}
@@ -80,7 +79,6 @@ const Layout = () => {
             tabBarIcon: ({ color }) => (
               <Entypo name="home" size={24} color={color} />
             ),
-            // tabBarActiveTintColor: Color.purple,
           }}
         />
         <Tab.Screen
@@ -91,7 +89,6 @@ const Layout = () => {
             tabBarIcon: ({ color }) => (
               <FontAwesome name="search" size={24} color={color} />
             ),
-            // tabBarActiveTintColor: Color.violet,
           }}
         />
         <Tab.Screen
@@ -102,7 +99,6 @@ const Layout = () => {
             tabBarIcon: ({ color }) => (
               <Ionicons name="library" size={24} color={color} />
             ),
-            // tabBarActiveTintColor: Color.purple,
           }}
         />
         <Tab.Screen
@@ -113,12 +109,10 @@ const Layout = () => {
             tabBarIcon: ({ color }) => (
               <FontAwesome name="user" size={24} color={color} />
             ),
-            // tabBarActiveTintColor: Color.purple,
           }}
         />
       </Tab.Navigator>
     </SafeAreaView>
-
   );
 };
 
@@ -127,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#CCC6CD",
     // paddingBottom:30,
-    marginBottom:30
+    marginBottom: 30,
   },
 });
 
