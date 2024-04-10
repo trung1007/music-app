@@ -1,5 +1,5 @@
 // import { StatusBar } from "expo-status-bar";
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { StyleSheet, Text, View, SafeAreaView, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,7 +14,8 @@ import themeContext from "./src/theme/themeContext";
 import theme from "./src/theme/theme";
 import { EventRegister } from "react-native-event-listeners";
 import MusicScreen from "./src/screens/MusicScreen";
-
+import { AuthProvider } from "./src/context/AuthContext";
+import AuthContext from "./src/context/AuthContext";
 
 const Stack = createStackNavigator();
 
@@ -53,8 +54,8 @@ export default function App() {
   useEffect(() => {
     const listener = EventRegister.addEventListener("ChangeTheme", (data) => {
       setDarkMode(data);
-      console.log(data)
-      changeStatusBarStyle()
+      console.log(data);
+      changeStatusBarStyle();
     });
     return () => {
       EventRegister.removeAllListeners(listener);
@@ -62,86 +63,88 @@ export default function App() {
   }, [darkMode]);
 
   return (
-    <themeContext.Provider value={darkMode===true ? theme.dark: theme.light}>
-      {/* <SafeAreaView style={styles.container}> */}
-      <NavigationContainer>
-        <StatusBar
-          animated={true}
-          backgroundColor="#61dafb"
-          barStyle={statusBarStyle}
-          showHideTransition={statusBarTransition}
-          hidden={hidden}
-        />
-        <Stack.Navigator initialRouteName="Getting1">
-          <Stack.Screen
-            name="Music1"
-            component={MusicScreen}
-            options={{
-              title: "",
-              headerStyle: {
-                height: 0,
-              },
-              headerLeft: null,
-            }}
+    <themeContext.Provider value={darkMode === true ? theme.dark : theme.light}>
+      <AuthProvider >
+        {/* <SafeAreaView style={styles.container}> */}
+        <NavigationContainer>
+          <StatusBar
+            animated={true}
+            backgroundColor="#61dafb"
+            barStyle={statusBarStyle}
+            showHideTransition={statusBarTransition}
+            hidden={hidden}
           />
-          <Stack.Screen
-            name="Getting1"
-            component={Getting1}
-            options={{
-              title: "",
-              headerStyle: {
-                height: 0,
-              },
-              headerLeft: null,
-            }}
-          />
-          <Stack.Screen
-            name="Login1"
-            component={LoginScreen1}
-            options={{
-              title: "",
-              headerStyle: {
-                height: 0,
-              },
-              headerLeft: null,
-            }}
-          />
-          <Stack.Screen
-            name="Login2"
-            component={LoginScreen2}
-            options={{
-              title: "",
-              headerStyle: {
-                height: 0,
-              },
-              headerLeft: null,
-            }}
-          />
-          <Stack.Screen
-            name="Register"
-            component={RegisterScreen}
-            options={{
-              title: "",
-              headerStyle: {
-                height: 0,
-              },
-              headerLeft: null,
-            }}
-          />
-          <Stack.Screen
-            name="Layout"
-            component={Layout}
-            options={{
-              title: "",
-              headerStyle: {
-                height: 0,
-              },
-              headerLeft: null,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-      {/* </SafeAreaView> */}
+          <Stack.Navigator initialRouteName="Getting1">
+            <Stack.Screen
+              name="Music1"
+              component={MusicScreen}
+              options={{
+                title: "",
+                headerStyle: {
+                  height: 0,
+                },
+                headerLeft: null,
+              }}
+            />
+            <Stack.Screen
+              name="Getting1"
+              component={Getting1}
+              options={{
+                title: "",
+                headerStyle: {
+                  height: 0,
+                },
+                headerLeft: null,
+              }}
+            />
+            <Stack.Screen
+              name="Login1"
+              component={LoginScreen1}
+              options={{
+                title: "",
+                headerStyle: {
+                  height: 0,
+                },
+                headerLeft: null,
+              }}
+            />
+            <Stack.Screen
+              name="Login2"
+              component={LoginScreen2}
+              options={{
+                title: "",
+                headerStyle: {
+                  height: 0,
+                },
+                headerLeft: null,
+              }}
+            />
+            <Stack.Screen
+              name="Register"
+              component={RegisterScreen}
+              options={{
+                title: "",
+                headerStyle: {
+                  height: 0,
+                },
+                headerLeft: null,
+              }}
+            />
+            <Stack.Screen
+              name="Layout"
+              component={Layout}
+              options={{
+                title: "",
+                headerStyle: {
+                  height: 0,
+                },
+                headerLeft: null,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+        {/* </SafeAreaView> */}
+      </AuthProvider>
     </themeContext.Provider>
   );
 }

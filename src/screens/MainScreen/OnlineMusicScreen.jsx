@@ -19,7 +19,7 @@ export default function OnlineMusicScreen() {
     const tracks = [];
     const onlineTracks = await getDocs(collection(FIREBASE_DB, "Music"));
     onlineTracks.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data().uri}`);
+      // console.log(`${doc.id} => ${doc.data().uri}`);
       tracks.push({
         uri: doc.data().uri,
         title: doc.data().title,
@@ -69,7 +69,7 @@ export default function OnlineMusicScreen() {
       if (status.didJustFinish) {
         setPlaying(-1);
         await sound.unloadAsync();
-        console.log("finished");
+        // console.log("finished");
         setSound(null);
       } else {
         setProgressDuration(status.positionMillis / 1000);

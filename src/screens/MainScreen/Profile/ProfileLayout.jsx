@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Button,
@@ -13,12 +13,16 @@ import "react-native-gesture-handler";
 import Profile from "./ProfileScreen";
 import Setting from "./SettingScreen";
 import themeContext from "../../../theme/themeContext";
+import { useRoute } from "@react-navigation/native";
+
 
 const Stack = createStackNavigator();
 
 const ProfileLayout = () => {
 
   const theme=useContext(themeContext)
+  // const route=useRoute()
+ 
 
   return (
     <SafeAreaView style={[{flex:1, backgroundColor:theme.backgroundColor}]}>

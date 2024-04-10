@@ -24,6 +24,10 @@ import themeContext from "../../theme/themeContext";
 import MusicScreen from "../MusicScreen";
 import OnlineMusicScreen from "./OnlineMusicScreen";
 import { NavigationContainer } from "@react-navigation/native";
+import { FIREBASE_AUTH, FIREBASE_DB } from "../../config/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { useRoute } from "@react-navigation/native";
+
 
 const Tab = createBottomTabNavigator();
 

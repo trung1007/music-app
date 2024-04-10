@@ -43,11 +43,6 @@ const Setting = () => {
 
       <Text style={[{ color: theme.color }]}>setting</Text>
       <Switch
-        // trackColor={{ false: "#767577", true: "#81b0ff" }}
-        // thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        // ios_backgroundColor="#3e3e3e"
-        // onValueChange={toggleSwitch}
-        // value={isEnabled}
         value={darkMode}
         onValueChange={(value) => {
           setDarkMode(value), EventRegister.emit("ChangeTheme", value);

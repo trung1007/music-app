@@ -25,28 +25,34 @@ import {
   onAuthStateChanged,
   signOut,
 } from "@firebase/auth";
-import { FIREBASE_AUTH, FIREBASE_APP } from "../../config/firebase";
+import {
+  FIREBASE_AUTH,
+  FIREBASE_APP,
+  FIREBASE_DB,
+} from "../../config/firebase";
 import themeContext from "../../theme/themeContext";
 import theme from "../../theme/theme";
+import { AuthProvider } from "../../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
+import { collection, getDocs } from "firebase/firestore";
 
 const LoginScreen2 = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("trungthanhcao.2003@gmail.com");
   const [password, setPassword] = useState("12323123");
   const [showSuccess, setShowSuccess] = useState(0);
+  // const [user, setUser] = useState({})
   const goLayout = () => {
     navigation.navigate("Layout");
   };
   const goRes = () => {
     navigation.navigate("Register");
   };
-  const windowWidth = Dimensions.get("window").width;
-  const windowHeight = Dimensions.get("window").height;
   const theme = useContext(themeContext);
   const SuccessMessage = ({ message }) => {
     return (
       <View style={styles.successContainer}>
-        <View style ={styles.successContent} >
+        <View style={styles.successContent}>
           <Text style={styles.successText}>{message}</Text>
         </View>
       </View>
@@ -54,27 +60,37 @@ const LoginScreen2 = () => {
   };
 
   const handleLogin = async () => {
+    const user = {};
     try {
       await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
       setShowSuccess(1);
+      const DataUser = await getDocs(collection(FIREBASE_DB, "User"));
+      DataUser.forEach((doc) => {
+        if (FIREBASE_AUTH.currentUser.email === doc.data().email) {
+          user.ava = doc.data().ava;
+          user.name = doc.data().Name;
+        }
+      });
+      AuthProvider.user = user;
     } catch (error) {
       console.log(error);
-      setShowSuccess(2)
+      setShowSuccess(2);
     }
   };
 
+
   useEffect(() => {
-    if (showSuccess==1) {
-      Alert.alert('Đăng nhập thành công')
+    console.log(AuthProvider.user);
+    if (showSuccess == 1) {
+      Alert.alert("Đăng nhập thành công");
       setTimeout(() => {
         setShowSuccess(false);
-        goLayout()
+        goLayout();
       }, 1500);
     }
-    if(showSuccess==2){
-      Alert.alert('Tài khoản không tồn tại vui lòng thử lại')
+    if (showSuccess == 2) {
+      Alert.alert("Tài khoản không tồn tại vui lòng thử lại");
     }
-    
   }, [showSuccess]);
 
   return (
@@ -212,16 +228,16 @@ const styles = StyleSheet.create({
     zIndex: 10,
     opacity: 0.5,
   },
-  successContent:{
-    display:'flex',
-    width:300,
-    height:300,
-    flex:1,
-    position:'relative',
-    backgroundColor:'black',
-    justifyContent:'center',
-    zIndex:11
-  }
+  successContent: {
+    display: "flex",
+    width: 300,
+    height: 300,
+    flex: 1,
+    position: "relative",
+    backgroundColor: "black",
+    justifyContent: "center",
+    zIndex: 11,
+  },
 });
 
 export default LoginScreen2;

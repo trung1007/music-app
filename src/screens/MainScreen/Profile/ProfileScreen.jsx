@@ -15,17 +15,18 @@ import "react-native-gesture-handler";
 import themeContext from "../../../theme/themeContext";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../../../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { useRoute } from "@react-navigation/native";
+import AuthContext from "../../../context/AuthContext";
+import { AuthProvider } from "../../../context/AuthContext";
 
 import { signOut } from "@firebase/auth";
 
 const Stack = createStackNavigator();
 const Profile = () => {
   const navigation = useNavigation();
-  // const [user, setUser] = useState();
-  const [infor, setInfor] = useState({});
-  const user = FIREBASE_AUTH.currentUser;
-  const email = user.email;
   const theme = useContext(themeContext);
+  const user = AuthProvider.user
+
   const handleSignOut = async () => {
     try {
       await signOut(FIREBASE_AUTH), console.log("SignOut Successfully");
@@ -34,42 +35,26 @@ const Profile = () => {
       console.log(error);
     }
   };
-  const fetchIn4 = async () => {
-    const infor = {};
-    const users = await getDocs(collection(FIREBASE_DB, "User"));
-    users.forEach((doc) => {
-      if (email === doc.data().email) {
-        infor.ava=doc.data().ava,
-        infor.name=doc.data().Name
-      }
-      
-    });
-    setInfor(infor);
-  };
-  useEffect(() => {
-    fetchIn4();
-    console.log(infor)
-    console.log(infor.ava);
-  },[]);
+  useEffect(()=>{
+    console.log(user);
+  })
 
   return (
     <View style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}>
       <View style={styles.header}>
         <Text style={[{ color: theme.color, fontSize: 32, fontWeight: "700" }]}>
-          Profile
+          Cá nhân
         </Text>
       </View>
       <View style={[styles.userInf, { borderBottomColor: theme.color }]}>
         <Image
           style={styles.ava}
           source={{
-            uri: infor.ava,
+            uri: user.ava,
           }}
         />
         <View style={[styles.inf, { borderBottomColor: theme.color }]}>
-          <Text style={[styles.name, { color: theme.color }]}>
-            {infor.name}
-          </Text>
+          <Text style={[styles.name, { color: theme.color }]}>{user.name}</Text>
           <View style={styles.role}>
             <Text style={{ color: "white", fontWeight: "600" }}>BASIC</Text>
           </View>
