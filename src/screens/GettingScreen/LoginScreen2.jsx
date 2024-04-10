@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Button,
@@ -9,6 +9,8 @@ import {
   Image,
   Text,
   TextInput,
+  Alert,
+  Dimensions,
 } from "react-native";
 
 import { Color } from "../../../GlobalStyle";
@@ -23,44 +25,79 @@ import {
   onAuthStateChanged,
   signOut,
 } from "@firebase/auth";
-import { FIREBASE_AUTH,FIREBASE_APP } from "../../config/firebase"
+import { FIREBASE_AUTH, FIREBASE_APP } from "../../config/firebase";
 import themeContext from "../../theme/themeContext";
 import theme from "../../theme/theme";
 
 const LoginScreen2 = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("trungthanhcao.2003@gmail.com");
+  const [password, setPassword] = useState("12323123");
+  const [showSuccess, setShowSuccess] = useState(0);
   const goLayout = () => {
     navigation.navigate("Layout");
   };
   const goRes = () => {
     navigation.navigate("Register");
   };
-  const theme = useContext(themeContext)
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
+  const theme = useContext(themeContext);
+  const SuccessMessage = ({ message }) => {
+    return (
+      <View style={styles.successContainer}>
+        <View style ={styles.successContent} >
+          <Text style={styles.successText}>{message}</Text>
+        </View>
+      </View>
+    );
+  };
 
-  const handleLogin = async ()=>{
+  const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(FIREBASE_AUTH, email, password)
-      goLayout()
+      await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
+      setShowSuccess(1);
     } catch (error) {
-      console.log(email)
-      console.log(password)
-      console.log(error)
+      console.log(error);
+      setShowSuccess(2)
     }
-  }
+  };
+
+  useEffect(() => {
+    if (showSuccess==1) {
+      Alert.alert('Đăng nhập thành công')
+      setTimeout(() => {
+        setShowSuccess(false);
+        goLayout()
+      }, 1500);
+      // Hide the success message after 3 seconds
+    }
+    if(showSuccess==2){
+      Alert.alert('Tài khoản không tồn tại vui lòng thử lại')
+    }
+    
+  }, [showSuccess]);
 
   return (
-    <SafeAreaView style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}>
+    <SafeAreaView
+      style={[styles.wrapper, { backgroundColor: theme.backgroundColor }]}
+    >
       <View style={{ paddingLeft: 10 }}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
           }}
         >
-          <AntDesign name="arrowleft" size={24} style={{color:theme.color}} />
+          <AntDesign
+            name="arrowleft"
+            size={24}
+            style={{ color: theme.color }}
+          />
         </TouchableOpacity>
       </View>
+      {/* {showSuccess && (
+        <SuccessMessage message="Login successful!" style={styles.LoginNoti} />
+      )} */}
       <View style={styles.content}>
         <Image source={require("../../../assets/MusicIcon.png")} />
         <View>
@@ -89,10 +126,11 @@ const LoginScreen2 = () => {
             secureTextEntry
           />
         </View>
+
         <View>
           <TouchableOpacity onPress={handleLogin}>
             <View style={styles.LoginBtn}>
-              <Text style={{ color: 'white' }}>Login</Text>
+              <Text style={{ color: "white" }}>Đăng nhập</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -146,7 +184,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: 280,
     height: 50,
-    color: theme.color
+    color: theme.color,
   },
   LoginBtn: {
     width: 350,
@@ -167,6 +205,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  successContainer: {
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    backgroundColor: "black",
+    position: "absolute",
+    zIndex: 10,
+    opacity: 0.5,
+  },
+  successContent:{
+    display:'flex',
+    width:300,
+    height:300,
+    flex:1,
+    position:'relative',
+    backgroundColor:'black',
+    justifyContent:'center',
+    zIndex:11
+  }
 });
 
 export default LoginScreen2;
