@@ -18,10 +18,13 @@ import SlideImage2 from "../../../components/SlideMusic2";
 import silderMusic2 from "../../../components/silderMusic2";
 import MusicList3 from "../../../components/MusicList3";
 import MusicList4 from "../../../components/MusicList4";
+import { useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
-  const [darkMode, setDarkMode] = useState(false);
   const theme = useContext(themeContext);
+  const route = useRoute();
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView
@@ -49,7 +52,9 @@ const HomeScreen = () => {
         </View>
         <View style={styles.playlist}>
           <TouchableOpacity>
-            <Text style={[styles.playlistText, {color:theme.color}]}>Có thể bạn muốn nghe</Text>
+            <Text style={[styles.playlistText, { color: theme.color }]}>
+              Có thể bạn muốn nghe
+            </Text>
           </TouchableOpacity>
           <FlatList
             data={silderMusic2}
@@ -61,7 +66,9 @@ const HomeScreen = () => {
         </View>
         <View style={styles.playlist}>
           <TouchableOpacity>
-            <Text style={[styles.playlistText,{color:theme.color}]}>Vừa Nghe Vừa Lak</Text>
+            <Text style={[styles.playlistText, { color: theme.color }]}>
+              Vừa Nghe Vừa Lak
+            </Text>
           </TouchableOpacity>
           <FlatList
             data={MusicList3}
@@ -69,12 +76,13 @@ const HomeScreen = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
             pagingEnabled={false}
-
           />
         </View>
         <View style={styles.playlist}>
           <TouchableOpacity>
-            <Text style={[styles.playlistText,{color:theme.color}]}>Chill</Text>
+            <Text style={[styles.playlistText, { color: theme.color }]}>
+              Chill
+            </Text>
           </TouchableOpacity>
           <FlatList
             data={MusicList4}
@@ -82,7 +90,6 @@ const HomeScreen = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
             pagingEnabled={false}
-            
           />
         </View>
         {/* <View style={styles.playlist}>
@@ -132,7 +139,7 @@ const styles = StyleSheet.create({
   content: {
     // paddingLeft: 10,
     // paddingRight: 10,
-    marginBottom:40
+    marginBottom: 40,
   },
   SOTDtext: {
     fontSize: 18,
@@ -147,11 +154,11 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     letterSpacing: 1,
     paddingLeft: 10,
-    marginBottom:10
+    marginBottom: 10,
   },
   playlist: {
-    marginTop:10,
-    marginBottom:10
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 

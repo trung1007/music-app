@@ -78,9 +78,7 @@ const LoginScreen2 = () => {
     }
   };
 
-
   useEffect(() => {
-    console.log(AuthProvider.user);
     if (showSuccess == 1) {
       Alert.alert("Đăng nhập thành công");
       setTimeout(() => {

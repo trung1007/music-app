@@ -11,9 +11,14 @@ import {
   Image,
   useWindowDimensions
 } from "react-native";
+import {useNavigation} from '@react-navigation/native'
+
 
 const SlideImage2 = ({ item }) => {
     const {width} = useWindowDimensions()
+    const navigation=useNavigation()
+
+    
   return (
     <View style={[ styles.wrapper]}>
       <Image source={item.image} style={[styles.image,{ } ]} />
