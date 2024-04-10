@@ -19,7 +19,7 @@ import silderMusic2 from "../../../components/silderMusic2";
 import MusicList3 from "../../../components/MusicList3";
 import MusicList4 from "../../../components/MusicList4";
 
-const Home1 = () => {
+const HomeScreen = () => {
   const [darkMode, setDarkMode] = useState(false);
   const theme = useContext(themeContext);
 
@@ -155,4 +155,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home1;
+export default HomeScreen;

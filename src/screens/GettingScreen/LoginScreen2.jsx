@@ -70,7 +70,6 @@ const LoginScreen2 = () => {
         setShowSuccess(false);
         goLayout()
       }, 1500);
-      // Hide the success message after 3 seconds
     }
     if(showSuccess==2){
       Alert.alert('Tài khoản không tồn tại vui lòng thử lại')
