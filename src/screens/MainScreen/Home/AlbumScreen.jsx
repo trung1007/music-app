@@ -32,6 +32,7 @@ const AlbumScreen = () => {
       song.push({
         name: doc.data().name,
         image: doc.data().image,
+        singer: doc.data().singer
       });
     });
     setSongAlubm(song);

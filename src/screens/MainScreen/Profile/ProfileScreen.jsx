@@ -50,11 +50,11 @@ const Profile = () => {
         <Image
           style={styles.ava}
           source={{
-            uri: user.ava,
+            // uri: user.ava || ''
           }}
         />
         <View style={[styles.inf, { borderBottomColor: theme.color }]}>
-          <Text style={[styles.name, { color: theme.color }]}>{user.name}</Text>
+          {/* <Text style={[styles.name, { color: theme.color }]}>{user.name}</Text> */}
           <View style={styles.role}>
             <Text style={{ color: "white", fontWeight: "600" }}>BASIC</Text>
           </View>
