@@ -54,7 +54,7 @@ const Layout = () => {
             height: 0,
           },
         }}
-        initialRouteName="Home"
+        initialRouteName="Search"
       >
         <Tab.Screen
           name="Online Music"
