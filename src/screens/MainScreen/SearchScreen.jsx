@@ -38,6 +38,7 @@ const Search = () => {
             style={styles.textInput}
             placeholder="Bạn muốn nghe gì?"
             placeholderTextColor="white"
+            color='white'
           />
         </Pressable>
         <ScrollView>

@@ -32,7 +32,9 @@ const AlbumScreen = () => {
       song.push({
         name: doc.data().name,
         image: doc.data().image,
-        singer: doc.data().singer
+        singer: doc.data().singer,
+        id: doc.data().id,
+        music:doc.data().music
       });
     });
     setSongAlubm(song);
@@ -64,7 +66,9 @@ const AlbumScreen = () => {
           {route.params[0].name}
         </Text>
 
-        <ScrollView contentContainerStyle={styles.content}>
+        <ScrollView 
+          showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.content}>
           <Image source={route.params[0].image} style={styles.albumImg} />
 
           {songAlbum.map((item) => (
@@ -82,6 +86,7 @@ const styles = StyleSheet.create({
   content: {
     display: "flex",
     alignItems: "center",
+    marginBottom:100
   },
   albumImg: {
     width: 200,
