@@ -17,6 +17,7 @@ import { FIREBASE_DB } from "../../../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import SlideImage1 from "../../../components/SlideMuisc1";
 import AlbumSong from "../../../components/AlbumSong";
+import SongPlayer from "../../../components/SongPlayer";
 const AlbumScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
@@ -24,6 +25,8 @@ const AlbumScreen = () => {
   const AlbumName = route.params[0].name;
 
   const [songAlbum, setSongAlubm] = useState([]);
+  const [selectedSong, setSelectedSong] = useState(null);
+  const [select, setSelect] = useState(false)
 
   const fetchMusic = async () => {
     const song = [];
@@ -42,7 +45,16 @@ const AlbumScreen = () => {
 
   useEffect(() => {
     fetchMusic();
+    setSelect(false)
   }, []);
+  const [currentSong, setCurrentSong] = useState({})
+  const handleSelectSong = (song) => {
+    setSelectedSong(song);
+    console.log(song);
+    setSelect(true)
+    setCurrentSong(song)
+  };
+
 
   return (
     <SafeAreaView
@@ -72,8 +84,13 @@ const AlbumScreen = () => {
           <Image source={route.params[0].image} style={styles.albumImg} />
 
           {songAlbum.map((item) => (
-            <AlbumSong item={item} />
+            <AlbumSong 
+            key={item.id}
+            item={item} 
+            onSelectSong={handleSelectSong}
+            />
           ))}
+          {select && (<SongPlayer item={currentSong}/>)}
         </ScrollView>
       </View>
     </SafeAreaView>

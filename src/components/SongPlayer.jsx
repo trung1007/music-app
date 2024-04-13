@@ -18,21 +18,30 @@ import {
 import themeContext from "../theme/themeContext";
 
 import { useNavigation } from "@react-navigation/native";
-const SongModal = ({ item, toggleModal }) => {
+import SongModal from "./SongModal";
+
+const SongPlayer = ({ item }) => {
   const theme = useContext(themeContext);
+  const [modalVisible, setModalVisible] = useState(true);
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
 
   return (
-    <Modal style={styles.modalContent}
-      animationType="slide"
-    > 
-        <SafeAreaView
-        style={{ flex: 1, alignItems: "center" }}
-      >
-        <Image source={{ uri: item.image }} style={styles.modalImage} />
-        <Text style={styles.modalText}>{item.name}</Text>
-        <Button title="Close" onPress={toggleModal} />
-      </SafeAreaView>
-    </Modal>
+    <TouchableOpacity onPress={toggleModal}>
+      <Image
+        source={{
+          uri: item.image,
+        }}
+        style={{height:50, width:50}}
+      />
+      <View>
+        <Text>{item.name}</Text>
+        <Text>{item.singer}</Text>
+      </View>
+      {modalVisible && <SongModal item={item} toggleModal={toggleModal} />}
+    </TouchableOpacity>
   );
 };
 
@@ -55,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SongModal;
+export default SongPlayer;

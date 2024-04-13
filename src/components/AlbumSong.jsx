@@ -13,33 +13,39 @@ import {
   Pressable,
   Dimensions,
   TouchableOpacity,
-  Modal
+  Modal,
 } from "react-native";
 import themeContext from "../theme/themeContext";
 
 import { useNavigation } from "@react-navigation/native";
 import SongModal from "./SongModal";
-const AlbumSong = ({ item }) => {
-  const theme = useContext(themeContext)
-  const [modalVisible, setModalVisible] = useState(false);
+import SongPlayer from "./SongPlayer";
+const AlbumSong = ({ item, onSelectSong }) => {
+  const theme = useContext(themeContext);
+  // const [modalVisible, setModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
+  // const toggleModal = () => {
+  //   setModalVisible(!modalVisible);
+  // };
+  const [selectSong, setSelectSong] = useState(false);
+
+  const handleSelectSong = () => {
+    onSelectSong(item);
   };
 
   return (
-    <TouchableOpacity style={styles.content} onPress={toggleModal}>
-      
-      <Image source={{ uri: item.image }} style={styles.songImg} />
-      <View style={styles.songInfo}>
-        <Text style={[styles.songName, {color:theme.color}]}>{item.name}</Text>
-        <Text style={[styles.songSinger]}>{item.singer}</Text>
-      </View>
-      {modalVisible && (
-        <SongModal item={item} toggleModal={toggleModal} />
-      )}
-       
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity style={styles.content} onPress={handleSelectSong}>
+        <Image source={{ uri: item.image }} style={styles.songImg} />
+        <View style={styles.songInfo}>
+          <Text style={[styles.songName, { color: theme.color }]}>
+            {item.name}
+          </Text>
+          <Text style={[styles.songSinger]}>{item.singer}</Text>
+        </View>
+      </TouchableOpacity>
+      {/* {selectSong && (<SongPlayer item={item}/>)} */}
+    </View>
   );
 };
 
@@ -48,27 +54,27 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     width: Dimensions.get("window").width,
-    gap:10,
-    padding:10
+    gap: 10,
+    padding: 10,
   },
   songImg: {
     width: 60,
     height: 60,
     borderRadius: 8,
   },
-  songInfo:{
-    display:'flex',
-    justifyContent:'space-between'
-  }, 
-  songName:{
-    fontSize:16,
-    fontWeight:'600',
-    marginTop:5
+  songInfo: {
+    display: "flex",
+    justifyContent: "space-between",
   },
-  songSinger:{
-    fontSize:14,
-    marginBottom:10,
-    color:'gray'
+  songName: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginTop: 5,
+  },
+  songSinger: {
+    fontSize: 14,
+    marginBottom: 10,
+    color: "gray",
   },
   modalContent: {
     flex: 1,
@@ -85,6 +91,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     marginTop: 5,
+  },
+  songPopUp: {
+    position: "relative",
+    bottom: 0,
   },
 });
 
