@@ -18,6 +18,7 @@ import { collection, getDocs } from "firebase/firestore";
 import SlideImage1 from "../../../components/SlideMuisc1";
 import AlbumSong from "../../../components/AlbumSong";
 import SongPlayer from "../../../components/SongPlayer";
+import { SongProvider } from "../../../context/SongContext";
 const AlbumScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
@@ -50,9 +51,13 @@ const AlbumScreen = () => {
   const [currentSong, setCurrentSong] = useState({})
   const handleSelectSong = (song) => {
     setSelectedSong(song);
-    console.log(song);
+    
     setSelect(true)
-    setCurrentSong(song)
+    // setCurrentSong(song)
+    SongProvider.song = song
+    SongProvider.select = true
+    // console.log(SongProvider.song);
+    // console.log('AlbumScreen');
   };
 
 
@@ -90,7 +95,8 @@ const AlbumScreen = () => {
             onSelectSong={handleSelectSong}
             />
           ))}
-          {select && (<SongPlayer item={currentSong}/>)}
+          {/* <SongPlayer item={currentSong}/> */}
+          {/* {select && (<SongPlayer item={currentSong}/>)} */}
         </ScrollView>
       </View>
     </SafeAreaView>

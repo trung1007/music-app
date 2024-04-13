@@ -14,54 +14,62 @@ import {
   Dimensions,
   TouchableOpacity,
   Modal,
+  LogBox,
 } from "react-native";
 import themeContext from "../theme/themeContext";
 
 import { useNavigation } from "@react-navigation/native";
 import SongModal from "./SongModal";
+import { SongProvider } from "../context/SongContext";
 
-const SongPlayer = ({ item }) => {
+const SongPlayer = () => {
   const theme = useContext(themeContext);
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const select =SongProvider.select
+  const song = SongProvider.song
+
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
 
+  useEffect(()=>{
+   
+    // console.log(song);
+  })
+
   return (
-    <TouchableOpacity onPress={toggleModal}>
+    <TouchableOpacity onPress={toggleModal} style={styles.stickPlayer}>
       <Image
         source={{
-          uri: item.image,
+          uri: song.image ,
         }}
         style={{height:50, width:50}}
       />
       <View>
-        <Text>{item.name}</Text>
-        <Text>{item.singer}</Text>
+        <Text>{song.name}</Text>
+        <Text>{song.singer}</Text>
       </View>
-      {modalVisible && <SongModal item={item} toggleModal={toggleModal} />}
+      {modalVisible && <SongModal item={song} toggleModal={toggleModal} />}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  modalContent: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  modalText: {
-    fontSize: 16,
-    fontWeight: "600",
-    marginTop: 5,
-  },
+  stickPlayer:{
+    position:'absolute',
+    height:60,
+    width:Dimensions.get('window').width,
+    bottom:53,
+    backgroundColor:'white',
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    borderTopWidth:1,
+    borderBottomWidth:1,
+    padding:5
+  }
 });
 
 export default SongPlayer;

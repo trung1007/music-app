@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Button,
@@ -20,11 +20,16 @@ import MusicList3 from "../../../components/MusicList3";
 import MusicList4 from "../../../components/MusicList4";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
+import { SongProvider } from "../../../context/SongContext";
 
 const HomeScreen = () => {
   const theme = useContext(themeContext);
   const route = useRoute();
   const navigation = useNavigation();
+  const song = SongProvider.song
+
+  useEffect(()=>{
+  })
 
   return (
     <SafeAreaView

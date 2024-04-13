@@ -20,7 +20,8 @@ import themeContext from "../theme/themeContext";
 import { useNavigation } from "@react-navigation/native";
 import SongModal from "./SongModal";
 import SongPlayer from "./SongPlayer";
-const AlbumSong = ({ item, onSelectSong }) => {
+import { SongProvider } from "../context/SongContext";
+const AlbumSong = ({ item }) => {
   const theme = useContext(themeContext);
   // const [modalVisible, setModalVisible] = useState(false);
 
@@ -30,7 +31,8 @@ const AlbumSong = ({ item, onSelectSong }) => {
   const [selectSong, setSelectSong] = useState(false);
 
   const handleSelectSong = () => {
-    onSelectSong(item);
+    SongProvider.song = item,
+    SongProvider.select = true
   };
 
   return (
