@@ -24,7 +24,7 @@ import { SongProvider } from "../context/SongContext";
 
 const SongPlayer = () => {
   const theme = useContext(themeContext);
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const song = SongProvider.song;
 

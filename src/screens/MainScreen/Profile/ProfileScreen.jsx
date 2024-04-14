@@ -30,7 +30,7 @@ const Profile = () => {
   const handleSignOut = async () => {
     try {
       await signOut(FIREBASE_AUTH), console.log("SignOut Successfully");
-      navigation.navigate("Login1");
+      navigation.navigate("Getting1");
     } catch (error) {
       console.log(error);
     }
@@ -50,11 +50,11 @@ const Profile = () => {
         <Image
           style={styles.ava}
           source={{
-            // uri: user.ava || ''
+            uri: user.ava
           }}
         />
         <View style={[styles.inf, { borderBottomColor: theme.color }]}>
-          {/* <Text style={[styles.name, { color: theme.color }]}>{user.name}</Text> */}
+          <Text style={[styles.name, { color: theme.color }]}>{user.name}</Text>
           <View style={styles.role}>
             <Text style={{ color: "white", fontWeight: "600" }}>BASIC</Text>
           </View>

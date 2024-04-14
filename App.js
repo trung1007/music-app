@@ -74,7 +74,7 @@ export default function App() {
             showHideTransition={statusBarTransition}
             hidden={hidden}
           />
-          <Stack.Navigator initialRouteName="Login2">
+          <Stack.Navigator initialRouteName="Getting1">
             <Stack.Screen
               name="Music1"
               component={MusicScreen}
