@@ -17,9 +17,23 @@ import {
 } from "react-native";
 import themeContext from "../theme/themeContext";
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 const SongModal = ({ item, toggleModal }) => {
   const theme = useContext(themeContext);
+  const navigation = useNavigation()
+  const route = useRoute();
+  const screenName = route.name;
+
+  const goHomeScreen =()=>{
+    navigation.navigate('HomeScreen')
+  }
+  const closeModal=()=>{
+    toggleModal()
+    if(screenName==='Album'){
+      goHomeScreen()
+    }
+  }
 
   return (
     <Modal style={styles.modalContent}
@@ -30,7 +44,7 @@ const SongModal = ({ item, toggleModal }) => {
       >
         <Image source={{ uri: item.image }} style={styles.modalImage} />
         <Text style={styles.modalText}>{item.name}</Text>
-        <Button title="Close" onPress={toggleModal} />
+        <Button title="Close" onPress={closeModal} />
       </SafeAreaView>
     </Modal>
   );

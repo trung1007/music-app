@@ -23,16 +23,17 @@ import SongPlayer from "./SongPlayer";
 import { SongProvider } from "../context/SongContext";
 const AlbumSong = ({ item }) => {
   const theme = useContext(themeContext);
-  // const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation()
+  const [modalVisible, setModalVisible] = useState(false);
+  
 
-  // const toggleModal = () => {
-  //   setModalVisible(!modalVisible);
-  // };
-  const [selectSong, setSelectSong] = useState(false);
-
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
+  
   const handleSelectSong = () => {
-    SongProvider.song = item,
-    SongProvider.select = true
+    (SongProvider.song = item), (SongProvider.select = true);
+    toggleModal()
   };
 
   return (
@@ -47,6 +48,7 @@ const AlbumSong = ({ item }) => {
         </View>
       </TouchableOpacity>
       {/* {selectSong && (<SongPlayer item={item}/>)} */}
+      {modalVisible && <SongModal item={SongProvider.song} toggleModal={toggleModal} />}
     </View>
   );
 };

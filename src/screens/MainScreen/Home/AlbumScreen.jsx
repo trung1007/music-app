@@ -53,11 +53,6 @@ const AlbumScreen = () => {
     setSelectedSong(song);
     
     setSelect(true)
-    // setCurrentSong(song)
-    SongProvider.song = song
-    SongProvider.select = true
-    // console.log(SongProvider.song);
-    // console.log('AlbumScreen');
   };
 
 
@@ -92,11 +87,9 @@ const AlbumScreen = () => {
             <AlbumSong 
             key={item.id}
             item={item} 
-            onSelectSong={handleSelectSong}
+            // onSelectSong={handleSelectSong}
             />
           ))}
-          {/* <SongPlayer item={currentSong}/> */}
-          {/* {select && (<SongPlayer item={currentSong}/>)} */}
         </ScrollView>
       </View>
     </SafeAreaView>

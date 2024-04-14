@@ -39,21 +39,6 @@ const Layout = () => {
   const theme = useContext(themeContext);
   const user = AuthProvider.user
 
-  const init = {
-    name: "",
-    image: "",
-    singer: "",
-    music: "",
-  };
-  
-  // useEffect(() => {
-  //   if (SongProvider.song === null) {
-  //     console.log("chua co bai hat");
-  //     setSong(init)
-  //   } else {
-  //     setSong(SongProvider.song)
-  //   }
-  // });
   const [song, setSong] = useState({})
 
   const select  = SongProvider.select
@@ -62,27 +47,17 @@ const Layout = () => {
   const [selectMusic, setSelectMusic] = useState(false)
 
   useEffect(()=>{
-    if(select!== undefined){
-      setSelectMusic(true)
-    }
-    console.log("dachon"+ select);
-    console.log(selectMusic);
-    if(selectMusic){
-      setSong(SongProvider.song)
-    }
-
-    // if(!select){
-    //   setSong({
-    //     name:'',
-    //     id:'',
-    //     image:'',
-      
-    //   })
+    // if(select){
+    //   setSelectMusic(select)
     // }
-    // else{
+    // console.log("dachon"+ select);
+    // console.log(selectMusic);
+    // if(selectMusic){
     //   setSong(SongProvider.song)
     // }
-
+    if(select){
+      setSong(SongProvider.song)
+    }
 
   }, [select])
 
@@ -171,7 +146,7 @@ const Layout = () => {
           />
         </Tab.Navigator>
         
-        {selectMusic && <SongPlayer item={song}/>}
+        {select && <SongPlayer  />}
 
       </SongProvider>
     </SafeAreaView>
